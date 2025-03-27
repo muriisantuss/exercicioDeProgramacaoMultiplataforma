@@ -5,8 +5,9 @@ import Menu from './component/Menu-1781432412016-.tsx';
 function App() {
   return (
     <>
-      <Container />
-      <Menu />
+      <Container>
+        <Menu></Menu>
+      </Container>
     </>
   );
 }
