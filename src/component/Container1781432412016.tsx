@@ -1,9 +1,11 @@
-function Container() {
-  return (
-    <main>
-      <p>teste</p>
-    </main>
-  );
+import React, { ReactNode } from "react";
+
+interface ContainerProps {
+  children: ReactNode;  // Aqui estamos dizendo que o Container vai receber filhos
 }
 
-export default Container;
+const Container1781432412016: React.FC<ContainerProps> = ({ children }) => {
+  return <main>{children}</main>; // Renderiza os filhos dentro de uma div
+};
+
+export default Container1781432412016;
