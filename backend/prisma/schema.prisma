@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Curso {
+  id           String    @id @default(auto()) @map("_id") @db.ObjectId
+  sigla        String
+  nomeCompleto String   // Nome por extenso do curso
+  telefone String   // Nome por extenso do curso
+  disciplinas  Disciplina[] // Relacionamento com disciplinas
+}
+
+model Disciplina {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  sigla        String   // Sigla da disciplina (PM, EST, etc.)
+  nome         String   // Nome da disciplina
+  semestre     String   // Semestre que a disciplina é oferecida
+  cursoId      String   @db.ObjectId // Relacionamento com o curso
+  curso        Curso    @relation(fields: [cursoId], references: [id]) // Relacionamento com Curso
+  professorId  String   @db.ObjectId // Relacionamento com o professor
+  professor    Professor @relation(fields: [professorId], references: [id]) // Relacionamento com Professor
+}
+
+model Professor {
+  id               String    @id @default(auto()) @map("_id") @db.ObjectId
+  identificacao    String    // Número funcional do professor
+  nome             String
+  email            String    @unique
+  disciplinas      Disciplina[] // Relacionamento com disciplinas
+}
