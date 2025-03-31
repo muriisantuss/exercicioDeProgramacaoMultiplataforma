@@ -1,54 +1,77 @@
-# React + TypeScript + Vite
+# Exercicio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Descrição:**
+Este projeto consiste em um aplicativo web com frontend e backend separados. O frontend foi desenvolvido utilizando React com TypeScript, enquanto o backend foi construído com Node.js e Prisma.
 
-Currently, two official plugins are available:
+## Estrutura do Projeto
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- `frontend/`: Contém o código-fonte do frontend.
+- `backend/`: Contém o código-fonte do backend.
 
-## Expanding the ESLint configuration
+## Pré-requisitos
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Antes de iniciar, certifique-se de ter instalado em sua máquina:
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- [Node.js](https://nodejs.org/) (versão recomendada: 14.x ou superior)
+- Gerenciador de pacotes npm (instalado junto com o Node.js)
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Configuração do Backend
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1. Navegue até o diretório do backend:
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+   ```bash
+   cd backend
+   ```
+
+2. Instale as dependências:
+
+   ```bash
+   npm install
+   ```
+
+3. Gere o cliente Prisma:
+
+   ```bash
+   npx prisma generate
+   ```
+
+4. Inicie o servidor:
+
+   ```bash
+   node server.js
+   ```
+
+   O servidor estará ouvindo na porta 3000.
+
+5. (Opcional) Para visualizar e gerenciar o banco de dados com Prisma Studio:
+
+   ```bash
+   npx prisma studio
+   ```
+
+## Configuração do Frontend
+
+1. Navegue até o diretório do frontend:
+
+   ```bash
+   cd frontend
+   ```
+
+2. Instale as dependências:
+
+   ```bash
+   npm install
+   ```
+
+3. Inicie o servidor de desenvolvimento:
+
+   ```bash
+   npm run dev
+   ```
+
+   O aplicativo estará acessível em `http://localhost:5173`.
+
+## Observações
+
+- Certifique-se de que o backend esteja em execução antes de iniciar o frontend para garantir a comunicação adequada entre os serviços.
+- Para mais detalhes sobre a estrutura do projeto, consulte os arquivos `README.md` nos diretórios `frontend/` e `backend/`.
