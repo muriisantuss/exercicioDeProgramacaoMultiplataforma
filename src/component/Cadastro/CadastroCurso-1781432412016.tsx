@@ -1,15 +1,20 @@
 import React, { useState } from 'react';
+import { cadastrarCurso } from '../../services/cursoServices';
 
 const CadastroCurso1781432412016: React.FC = () => {
   const [sigla, setSigla] = useState('');
   const [nome, setNome] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Curso cadastrado:', { sigla, nome });
-
-    // Aqui você pode adicionar a lógica para salvar os dados, como enviar para um backend.
-
+    try {
+      const result = await cadastrarCurso(sigla, nome);
+      console.log('Curso cadastrado com sucesso:', result);
+      setSigla('');
+      setNome('');
+    } catch (error) {
+      console.error('Erro ao cadastrar curso:', error);
+    }
     setSigla('');
     setNome('');
   };
@@ -23,7 +28,9 @@ const CadastroCurso1781432412016: React.FC = () => {
     <div className="p-6 m-auto rounded-lg w-full max-w-sm md:max-w-md">
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-2xl text-stone-800 font-extrabold mb-1">Sigla do Curso</label>
+          <label className="block text-2xl text-stone-800 font-extrabold mb-1">
+            Sigla do Curso
+          </label>
           <input
             type="text"
             value={sigla}
@@ -34,7 +41,9 @@ const CadastroCurso1781432412016: React.FC = () => {
           />
         </div>
         <div>
-          <label className="block text-2xl text-stone-800 font-extrabold mb-1">Nome Completo</label>
+          <label className="block text-2xl text-stone-800 font-extrabold mb-1">
+            Nome Completo
+          </label>
           <input
             type="text"
             value={nome}

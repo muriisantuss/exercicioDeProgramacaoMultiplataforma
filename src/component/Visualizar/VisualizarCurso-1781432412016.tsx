@@ -1,19 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { getCursos } from '../../services/cursoServices';
+import { Curso } from '../../Types/Curso';
 
-const VisualizarDisciplina1781432412016: React.FC = () => {
-  const [disciplinas] = useState([
-    { codigo: 'MAT101', nome: 'Matemática Básica' },
-    { codigo: 'FIS101', nome: 'Física Geral' },
-  ]);
+const VisualizarCurso1781432412016: React.FC = () => {
+  const [cursos, setCursos] = useState<Curso[]>([]);
+
+  useEffect(() => {
+    const fetchCursos = async () => {
+      try {
+        const cursosData = await getCursos();
+        setCursos(cursosData);
+      } catch (error) {
+        console.error('Erro ao buscar cursos:', error);
+      }
+    };
+
+    fetchCursos();
+  }, []);
 
   return (
     <div className="p-6 rounded-lg w-full max-w-lg m-auto bg-white shadow-md">
-      <h1 className="text-3xl text-stone-800 font-extrabold mb-4">Disciplinas Cadastradas</h1>
+      <h1 className="text-3xl text-stone-800 font-extrabold mb-4">
+        Cursos Cadastrados
+      </h1>
       <ul className="space-y-3">
-        {disciplinas.map((disciplina, index) => (
+        {cursos.map((curso, index) => (
           <li key={index} className="bg-stone-100 p-4 rounded-lg shadow-sm">
-            <h2 className="text-xl font-bold text-stone-700">{disciplina.codigo}</h2>
-            <p className="text-stone-600">{disciplina.nome}</p>
+            <h2 className="text-xl font-bold text-stone-700">{curso.sigla}</h2>
+            <p className="text-stone-600">{curso.nomeCompleto}</p>
           </li>
         ))}
       </ul>
@@ -21,4 +35,4 @@ const VisualizarDisciplina1781432412016: React.FC = () => {
   );
 };
 
-export default VisualizarDisciplina1781432412016;
+export default VisualizarCurso1781432412016;

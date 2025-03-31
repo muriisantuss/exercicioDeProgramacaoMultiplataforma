@@ -1,25 +1,32 @@
 import React, { useState } from 'react';
+import { cadastrarProfessor } from '../../services/ProfessorService';
 
 const CadastroProfessor1781432412016: React.FC = () => {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
-  const [telefone, setTelefone] = useState('');
+  const [identificacao, setIdentificacao] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Professor cadastrado:', { nome, email, telefone });
 
-    // Aqui você pode adicionar a lógica para salvar os dados, como enviar para um backend.
+    const professor = { nome, email, identificacao };
 
-    setNome('');
-    setEmail('');
-    setTelefone('');
+    try {
+      const resultado = await cadastrarProfessor(professor);
+      console.log('Professor cadastrado:', resultado);
+
+      setNome('');
+      setEmail('');
+      setIdentificacao('');
+    } catch (error) {
+      console.error('Erro ao cadastrar professor', error);
+    }
   };
 
   const handleCancel = () => {
     setNome('');
     setEmail('');
-    setTelefone('');
+    setIdentificacao('');
   };
 
   return (
@@ -47,11 +54,11 @@ const CadastroProfessor1781432412016: React.FC = () => {
           />
         </div>
         <div>
-          <label className="block text-2xl text-stone-800 font-extrabold mb-1">Telefone</label>
+          <label className="block text-2xl text-stone-800 font-extrabold mb-1">Identificação</label>
           <input
-            type="tel"
-            value={telefone}
-            onChange={(e) => setTelefone(e.target.value)}
+            type="text"
+            value={identificacao}
+            onChange={(e) => setIdentificacao(e.target.value)}
             className="w-full p-2 bg-stone-100 text-stone-800 font-bold border-2 border-stone-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-stone-800"
             required
           />
